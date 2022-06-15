@@ -18,7 +18,6 @@ class DescribeScreen extends StatelessWidget {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-           
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -47,7 +46,7 @@ class DescribeScreen extends StatelessWidget {
               ),
             );
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         }()),
       );

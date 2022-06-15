@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rubium_test/core/db/db_provider.dart';
 import 'package:rubium_test/core/network/client_service.dart';
 import 'package:rubium_test/features/data/datasource/person_source.dart';
 import 'package:rubium_test/features/screens/_controller/screens_bloc.dart';
 import 'package:rubium_test/features/screens/_controller/screens_events.dart';
+import 'package:rubium_test/features/screens/auth_screen/controller/login_bloc.dart';
+import 'package:rubium_test/features/screens/auth_screen/controller/login_events.dart';
 
-import 'features/screens/auth_screen/login_screen.dart';
+import 'features/screens/auth_screen/pages/login_screen.dart';
 import 'features/screens/describe_id_screen/describe_screen.dart';
 import 'features/screens/list_id_screen/list_screen.dart';
 
@@ -14,7 +17,6 @@ void main() async {
   BlocOverrides.runZoned(
     () => runApp(const MyApp()),
   );
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -25,8 +27,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(DBProvider())..add(LoginInitialEvent())),
         BlocProvider<ScreensBlock>(
-          create: (context) => ScreensBlock(PersonRemoteSource(ClientService()))..add(InitialEvent()))
+            create: (context) =>
+                ScreensBlock(PersonRemoteSource(ClientService()))
+                  ..add(InitialEvent())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -34,14 +40,11 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          '/' :(context) => const LoginScreen(),
+          '/': (context) => const LoginScreen(),
           '/list': (context) => const ListScreen(),
-          '/describe' : (context) => const DescribeScreen()
+          '/describe': (context) => const DescribeScreen()
         },
       ),
     );
   }
 }
-
-
-

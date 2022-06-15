@@ -110,9 +110,9 @@ class ListScreen extends StatelessWidget {
                     })),
               );
             } else if (state is LoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           }()));
     });

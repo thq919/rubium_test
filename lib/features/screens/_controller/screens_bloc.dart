@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rubium_test/features/data/datasource/person_source.dart';
 import 'package:rubium_test/features/data/model/getrandom_model.dart';
 import 'package:rubium_test/features/data/model/model_attr/identity_model.dart';
-import 'package:rubium_test/features/data/model/model_attr/info_model.dart';
 import 'package:rubium_test/features/screens/_controller/screen_states.dart';
 import 'package:rubium_test/features/screens/_controller/screens_events.dart';
 
@@ -43,7 +42,7 @@ class ScreensBlock extends Bloc<ScreensEvent, ScreensState> {
       emit(LoadingState());
       List<Identity> prefferedValueList = List.empty(growable: true);
       List<Identity> unprefferedValueList = List.empty(growable: true);
-      model.results.forEach((element) {
+      for (var element in model.results) {
         element.name.first
                     .toLowerCase()
                     .contains(event.sortQuery.toLowerCase()) ||
@@ -52,7 +51,7 @@ class ScreensBlock extends Bloc<ScreensEvent, ScreensState> {
                     .contains(event.sortQuery.toLowerCase())
             ? prefferedValueList.add(element)
             : unprefferedValueList.add(element);
-      });
+      }
       List<Identity> finalList = [
         ...prefferedValueList,
         ...unprefferedValueList

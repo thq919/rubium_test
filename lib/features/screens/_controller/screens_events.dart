@@ -14,7 +14,9 @@ class LoginCompleteEvent extends ScreensEvent {
 }
 
 class ReloadEvent extends ScreensEvent {}
+
 class RenewScreenEvent extends ScreensEvent {}
+
 class ItemNeedToShowDescribeEvent extends ScreensEvent {
   Identity entity;
   ItemNeedToShowDescribeEvent(this.entity);
